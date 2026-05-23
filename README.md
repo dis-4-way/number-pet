@@ -1,2 +1,2 @@
 # Hi! 
-## This is my study-pet project for learning GiT and Python
+## This is my study-pet project for learning Git, MD and Python
