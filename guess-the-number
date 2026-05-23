@@ -1,20 +1,51 @@
 import random
 
-# 1. Загадываем число от 1 до 100
-secret = random.randint(1, 100)
+# Статистика
+total_games = 0          # количество сыгранных сессий
+total_guesses = 0        # количество угаданных чисел (пока = total_games)
+total_attempts = 0       # сумма всех попыток за все игры
 
-print("Я загадал число от 1 до 100. Попробуй угадать!")
+print("Добро пожаловать в игру 'Угадай число'!")
 
-# 2. Бесконечный цикл (выход только при угадывании)
+# Основной цикл сессий
 while True:
-    # 3. Получаем догадку от игрока
-    guess = int(input("Твоё число: "))
+    secret = random.randint(1, 100)
+    attempts = 0
+    print("\n--- Новая игра ---")
+    print("Я загадал число от 1 до 100.")
     
-    # 4. Сравниваем и даём подсказку
-    if guess < secret:
-        print("Больше!")
-    elif guess > secret:
-        print("Меньше!")
+    # Цикл угадывания в текущей сессии
+    while True:
+        try:
+            guess = int(input("Твоё число: "))
+            attempts += 1
+            
+            if guess < secret:
+                print("Больше!")
+            elif guess > secret:
+                print("Меньше!")
+            else:
+                print(f"Поздравляю! Ты угадал с {attempts} попытки(ок).")
+                # Обновляем статистику
+                total_games += 1
+                total_guesses += 1
+                total_attempts += attempts
+                break
+        except ValueError:
+            print("Ошибка! Введи целое число.")
+    
+    # Показываем текущую статистику
+    print("\n--- Твоя статистика ---")
+    print(f"Сыграно сессий (игр): {total_games}")
+    print(f"Угадано чисел: {total_guesses}")
+    if total_games > 0:
+        avg = total_attempts / total_games
+        print(f"Среднее количество попыток на игру: {avg:.2f}")
     else:
-        print("Поздравляю! Ты угадал!")
-        break  # выход из цикла
+        print("Среднее количество попыток: 0")
+    
+    # Спрашиваем, продолжить ли
+    again = input("\nСыграем ещё? (да/нет): ").strip().lower()
+    if again not in ('да', 'yes', 'д', 'y'):
+        print("Спасибо за игру! До встречи.")
+        break
