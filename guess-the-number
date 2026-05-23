@@ -45,7 +45,7 @@ while True:
         print("Среднее количество попыток: 0")
     
     # Спрашиваем, продолжить ли
-    again = input("\nСыграем ещё? (да/нет): ").strip().lower()
+    again = input("\nCыграем ещё? (да/нет): ").strip().lower()
     if again not in ('да', 'yes', 'д', 'y'):
         print("Спасибо за игру! До встречи.")
         break
